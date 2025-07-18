@@ -57,7 +57,7 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary);
+    color: white;
     text-decoration: none;
     transition: transform 0.3s ease;
     display: flex;
