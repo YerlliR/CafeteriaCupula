@@ -11,6 +11,8 @@
             --light: #f5f5f5;
             --dark: #1a0f08;
             --gradient: linear-gradient(135deg, #2c1810 0%, #8b4513 100%);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
@@ -28,7 +30,7 @@
             background: rgba(44, 24, 16, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
@@ -38,7 +40,7 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -70,7 +72,7 @@
         .nav-link {
             color: #fff;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             padding: 0.5rem 0;
         }
@@ -117,24 +119,12 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.3) 70%);
-            animation: pulse 15s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0); }
-            50% { transform: scale(1.1) rotate(180deg); }
-        }
-
         .hero-content {
             position: relative;
             z-index: 1;
             animation: fadeInUp 1s ease-out;
+            max-width: 800px;
+            padding: 0 2rem;
         }
 
         @keyframes fadeInUp {
@@ -149,19 +139,13 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(212, 165, 116, 0.5); }
-            to { text-shadow: 2px 2px 8px rgba(0,0,0,0.7), 0 0 30px rgba(212, 165, 116, 0.8); }
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
             margin-bottom: 2rem;
             opacity: 0.9;
         }
@@ -173,25 +157,10 @@
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
             position: relative;
             overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
         }
 
         .btn:hover {
@@ -202,18 +171,16 @@
         /* Section Styles */
         .section {
             padding: 5rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 3rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 3rem;
             color: var(--primary);
             position: relative;
-            display: inline-block;
-            width: 100%;
         }
 
         .section-title::after {
@@ -230,73 +197,26 @@
         /* Historia Section */
         .historia {
             background: var(--light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .historia::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .historia-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .historia-text {
-            animation: slideInLeft 1s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .historia-text p {
             margin-bottom: 1rem;
             line-height: 1.8;
             color: #333;
+            font-size: 1.1rem;
         }
 
         .historia-img {
-            position: relative;
-            overflow: hidden;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            animation: slideInRight 1s ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
         }
 
         .historia-img img {
@@ -308,6 +228,43 @@
 
         .historia-img:hover img {
             transform: scale(1.1);
+        }
+
+        /* Especialidades Section */
+        .especialidades {
+            padding: 5rem 2rem;
+        }
+
+        .especialidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .especialidad-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .especialidad-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .especialidad-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .especialidad-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         /* Productos Section */
@@ -322,25 +279,8 @@
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .producto-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .producto-card:hover::before {
-            transform: scaleX(1);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
         }
 
         .producto-card:hover {
@@ -361,7 +301,7 @@
         }
 
         .producto-card:hover .producto-img img {
-            transform: scale(1.2) rotate(3deg);
+            transform: scale(1.1);
         }
 
         .producto-info {
@@ -385,15 +325,125 @@
             font-weight: bold;
         }
 
+        /* Eventos Section */
+        .eventos {
+            background: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .eventos-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .evento-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .evento-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .evento-header {
+            background: var(--gradient);
+            color: #fff;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .evento-fecha {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .evento-hora {
+            opacity: 0.9;
+        }
+
+        .evento-body {
+            padding: 2rem;
+        }
+
+        .evento-body h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 5rem 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-photo {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .team-photo img {
+            transform: scale(1.1);
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
         /* Testimonios */
         .testimonios {
             background: var(--light);
             padding: 5rem 2rem;
-            position: relative;
         }
 
         .testimonios-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -408,9 +458,9 @@
             background: #fff;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             position: relative;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
         }
 
         .testimonio-card:hover {
@@ -443,10 +493,92 @@
             color: var(--primary);
         }
 
+        /* Galería Section */
+        .galeria {
+            padding: 5rem 2rem;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .galeria-item {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.05);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Horarios y Precios */
+        .horarios-precios {
+            background: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .horarios-precios-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .horarios-card, .precios-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .horarios-card h3, .precios-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .horario-item, .precio-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .horario-dia {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .horario-hora {
+            color: var(--accent);
+        }
+
         /* Contacto Section */
         .contacto-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
         }
@@ -455,7 +587,7 @@
             background: var(--light);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
         }
 
         .contacto-item {
@@ -474,7 +606,7 @@
         .mapa {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             height: 400px;
         }
 
@@ -496,7 +628,7 @@
             background: #fff;
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
         }
 
         .form-group {
@@ -516,7 +648,7 @@
             padding: 1rem;
             border: 2px solid #ddd;
             border-radius: 10px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-size: 1rem;
         }
 
@@ -542,9 +674,7 @@
             border-radius: 50px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: var(--transition);
         }
 
         .btn-submit:hover {
@@ -557,11 +687,10 @@
             background: var(--dark);
             color: #fff;
             padding: 3rem 2rem 1rem;
-            text-align: center;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -578,7 +707,7 @@
         .footer-section a {
             color: #ccc;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
 
         .footer-section a:hover {
@@ -587,22 +716,20 @@
 
         .social-links {
             display: flex;
-            justify-content: center;
             gap: 1rem;
             margin-top: 1rem;
         }
 
         .social-links a {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 40px;
             height: 40px;
             background: var(--accent);
             color: var(--dark);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
@@ -614,6 +741,7 @@
             border-top: 1px solid #333;
             padding-top: 1rem;
             margin-top: 2rem;
+            text-align: center;
         }
 
         /* Responsive */
@@ -638,21 +766,20 @@
                 display: flex;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .section {
+                padding: 3rem 1rem;
             }
 
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .historia-content,
-            .contacto-container {
+            .productos-grid,
+            .eventos-grid,
+            .team-grid,
+            .testimonios-grid,
+            .galeria-grid {
                 grid-template-columns: 1fr;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .especialidades-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
 
